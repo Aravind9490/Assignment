@@ -1,0 +1,6 @@
+WoW Sales Change = 
+VAR CurrentWeek = MAX('combined sales'[Week of Year])
+VAR CurrentWeekSales = CALCULATE(SUM('combined sales'[Sales]), 'combined sales'[Week of Year] = CurrentWeek)
+VAR PreviousWeekSales = CALCULATE(SUM('combined sales'[Sales]), 'combined sales'[Week of Year] = CurrentWeek - 1)
+RETURN
+IF(ISBLANK(PreviousWeekSales), BLANK(), (CurrentWeekSales - PreviousWeekSales) / PreviousWeekSales)
